@@ -9,19 +9,26 @@ class TransformData:
     def __init__(self):
         self.local = '/home/jhonattanln/hrp_etf/src/data/'
         self.file = 'etf.xlsx'
+        self.etf = None
 
     def extract_data(self):
-        etf = pd.read_excel(self.local + self.file, index_col=0,
+        self.etf = pd.read_excel(self.local + self.file, index_col=0,
                             parse_dates=True, skiprows=3)
-        global etf
-        return etf
+        return self.etf
 
     def rename_columns(self):
-        et
+        self.etf.columns = self.etf.columns.str[-6:]
+        return self.etf
+
+    def replace_null(self):
+        self.etf.replace.str('-', nan, inplace=True)
+        return self.etf
 # %% Call class
 if __name__ == '__main__':
     trasform = TransformData()
     data = trasform.extract_data()
-    print(data)
+    columns = trasform.rename_columns()
+    replace = trasform.rename_columns()
+    print(data.head())
 
 # %%
